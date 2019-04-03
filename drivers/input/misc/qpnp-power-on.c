@@ -890,6 +890,8 @@ static int qpnp_pon_store_and_clear_warm_reset(struct qpnp_pon *pon)
 	return 0;
 }
 
+extern void sysrq_handle_showallcpus(int key);
+
 static int
 qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 {
@@ -935,6 +937,7 @@ qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 			pr_info("Power-Key DOWN\n");
 				schedule_delayed_work(&pon->press_work,
 						msecs_to_jiffies(3000));
+			sysrq_handle_showallcpus(0);
 		}
 		break;
 	case PON_RESIN:
